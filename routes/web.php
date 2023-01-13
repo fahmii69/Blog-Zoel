@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Back\BackController;
+use App\Http\Controllers\Back\PostController;
 use App\Http\Controllers\Front\DashboardController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,12 +18,20 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [DashboardController::class, 'index'])->name('front.index');
-Route::get('/article', [DashboardController::class, 'list_blog'])->name('front.article');
-Route::get('/category/{category:category_name}', [DashboardController::class, 'list_category'])->name('front.category');
-Route::get('/tag/{tags:tag_name}', [DashboardController::class, 'list_tag'])->name('front.tags');
-Route::get('/user/{user:name}', [DashboardController::class, 'list_user'])->name('front.user');
+Route::get('/article', [DashboardController::class, 'postList'])->name('front.article');
+Route::get('/category/{category:category_name}', [DashboardController::class, 'categoryList'])->name('front.category');
+Route::get('/tag/{tags:tag_name}', [DashboardController::class, 'tagList'])->name('front.tags');
+Route::get('/user/{user:name}', [DashboardController::class, 'userList'])->name('front.user');
+Route::get('/search', [DashboardController::class, 'postSearch'])->name('front.search');
+Route::get('/detail-post/{post}', [DashboardController::class, 'postDetail'])->name('front.post');
 
-Route::get('/post/{post}', [DashboardController::class, 'post_detail'])->name('front.post');
+
+// Route::get('/back', [BackController::class, 'index'])->name('back.post');
+Route::get('/back/list', [BackController::class, 'getPost'])->name('back.list');
+Route::resource('back', BackController::class);
+Route::resource('post', PostController::class);
+
+
 
 Route::group([
     'prefix' => 'front',

@@ -25,8 +25,8 @@
 					<h3 class="footer-title">Categories</h3>
 					<div class="category-widget">
 						<ul>
-							@foreach($category_widget as $hasil)
-							<li><a href="#">{{ $hasil->category_name }} <span>{{ $hasil->post->count() }}</span></a></li>
+							@foreach($category_widget as $result)
+							<li><a href="{{ route('front.category', $result->category_name ) }}">{{ $result->category_name }} <span>{{ $result->post->count() }}</span></a></li>
 							@endforeach
 						</ul>
 					</div>
@@ -96,6 +96,7 @@
 <script src="{{ asset('frontend/js/main.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
 <script src="{{ asset('assets/modules/owlcarousel2/dist/owl.carousel.min.js') }}"></script>
+@stack('js');
 
 
 </html>

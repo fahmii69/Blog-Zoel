@@ -31,7 +31,7 @@
 								<a href="{{ route('front.category', $post->category->category_name ) }}">{{ $post->category->category_name }}</a>
 							</div>
 							<h3 class="post-title"><a href="{{ route('front.post', $post->id ) }}">{{ $post->post_title }}</a></h3>
-                            <span >{{ $post->post_slug }}</span>
+                            <span >{{ $post->post_body }}</span>
 							<ul class="post-meta">
 								<li>
 									<a href="{{ route('front.user', $post->users->name ) }}">
@@ -47,7 +47,7 @@
 			<!-- /row -->
 			<br>
 			<div class="text-center mt-30">
-				{{$posts->links()}}
+				{{$posts->appends(request()->input())->links()}}
 			</div>
 		</div>
 @endsection

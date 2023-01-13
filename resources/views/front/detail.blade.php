@@ -53,9 +53,9 @@
 
 				<ul>
 					<li>TAGS:</li>
-					{{-- @foreach ($post as $posts) --}}
-					<li><a href="{{ route('front.tags', $post->tags->tag_name) }}">{{ $post->tags->tag_name }}</a></li>	
-					{{-- @endforeach --}}
+					@foreach ($post->tags as $item)
+					<li><a href="{{ route('front.tags', $item->tag_list) }}">{{ $item->tag_list}}</a></li>	
+					@endforeach
 				</ul>
 
 			</div>

@@ -22,7 +22,7 @@ class DashboardController extends BaseController
         return view('front.dashboard', compact('posts', 'category_widget', 'allPosts', 'tag'));
     }
 
-    public function list_blog()
+    public function postList()
     {
         $category_widget = Category::all();
         $posts = Post::latest()->paginate(5);
@@ -31,7 +31,7 @@ class DashboardController extends BaseController
         return view('front.article', compact('posts', 'category_widget', 'tag'));
     }
 
-    public function list_category(Category $category)
+    public function categoryList(Category $category)
     {
         // dd($category->category_name);
         $title = $category->category_name;
@@ -43,19 +43,19 @@ class DashboardController extends BaseController
         return view('front.article', compact('posts', 'category_widget', 'tag', 'title'));
     }
 
-    public function list_tag(Tags $tags)
+    public function tagList(Tags $tags)
     {
         // dd($tags->id);
         $title = $tags->tag_name;
         $category_widget = Category::all();
         $tag = Tags::all();
 
-        $posts = Post::latest()->whereTagId($tags->id)->paginate(5);
+        $posts = Post::latest()->with('tags')->paginate(5);
         // dd($posts);
         return view('front.article', compact('posts', 'category_widget', 'tag', 'title'));
     }
 
-    public function list_user(User $user)
+    public function userList(User $user)
     {
         // dd($tags->id);
         $title = $user->name;
@@ -67,13 +67,27 @@ class DashboardController extends BaseController
         return view('front.article', compact('posts', 'category_widget', 'tag', 'title'));
     }
 
-    public function post_detail(Post $post)
+    public function postSearch(request $request)
+    {
+
+        // dd($request->all());
+        $title = $request->cari;
+        $category_widget = Category::all();
+        $tag = Tags::all();
+
+        $posts = Post::where('post_title', $request->cari)->orWhere('post_body', 'like', '%' . $request->cari . '%')->paginate(5);
+        // dd($posts);
+        return view('front.article', compact('posts', 'category_widget', 'tag', 'title'));
+    }
+
+    public function postDetail(Post $post)
     {
         // dd($post->tags->tag_name);
         // dd($tags->id);
         // $title = $post->post_title;
         $category_widget = Category::all();
         $tag = Tags::all();
+        // $postTag = ProductTag
 
         // $posts = Post::latest()->whereTagId($user->id)->paginate(5);
         // dd($posts);

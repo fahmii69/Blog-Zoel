@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\PostTag;
 use App\Models\Tags;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -38,19 +39,26 @@ class PostSeeder extends Seeder
         ];
 
         for ($i = 0; $i < 50; $i++) {
-            Post::create(
+            $post = Post::create(
                 [
                     'user_id'     => User::inRandomOrder()->first()->id,
                     'category_id' => Category::inRandomOrder()->first()->id,
-                    'tag_id'      => Tags::inRandomOrder()->first()->id,
+                    // 'tag_id'      => Tags::inRandomOrder()->first()->id,
                     'post_title'  => $faker->sentence(),
-                    'post_slug'   => $faker->paragraph(2),
+                    // 'post_slug'   => $faker->paragraph(2),
                     'post_body'   => $faker->text(2000, true),
                     'post_image'  => $faker->imageUrl($width = 800, $height = 600),
                     'created_at'  => now()->toDateTimeString(),
                     'updated_at'  => now()->toDateTimeString(),
                 ]
             );
+
+            foreach (range(1, rand(1, 3)) as $k) {
+                PostTag::create([
+                    'tag_id'  => rand(1, 11),
+                    'post_id' => $post->id,
+                ]);
+            }
         }
     }
 }

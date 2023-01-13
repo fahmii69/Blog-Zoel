@@ -9,6 +9,7 @@ class Post extends Model
 {
     use HasFactory;
 
+    protected $table = 'posts';
     protected $guarded = [];
 
     public function users()
@@ -23,6 +24,6 @@ class Post extends Model
 
     public function tags()
     {
-        return $this->belongsTo(Tags::class, 'tag_id');
+        return $this->hasMany(PostTag::class, 'post_id');
     }
 }

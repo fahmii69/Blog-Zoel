@@ -36,7 +36,7 @@
 								<a href="{{ route('front.category', $post->category->category_name ) }}">{{ $post->category->category_name }}</a>
 							</div>
                             <h3 class="post-title"><a href="{{ route('front.post', $post->id ) }}">{{ $post->post_title }}</a></h3>
-                            <span class="post-slug">{{ $post->post_slug }}</span>
+                            <span class="post-slug">{{ $post->post_body }}</span>
                             <ul class="post-meta">
 								<li><a href="{{ route('front.user', $post->users->name ) }}">{{ $post->users->name }}</a></li>
 								<li>{{ $post->created_at->diffForHumans() }}</li>
@@ -69,7 +69,7 @@
 						<a href="{{ route('front.category', $post->category->category_name ) }}">{{ $post->category->category_name }}</a>
 					</div>
 					<h3 class="post-title"><a href="{{ route('front.post', $post->id ) }}">{{ $post->post_title }}</a></h3>
-					<span class="post-slug">{{ $post->post_slug }}</span>
+					<span class="post-slug">{{ $post->post_body }}</span>
 					<ul class="post-meta">
 						<li><a href="{{ route('front.user', $post->users->name ) }}">{{ $post->users->name }}</a></li>
 						<li>{{ $post->created_at->diffForHumans() }}</li>
@@ -101,3 +101,60 @@
             @endforeach
         </div>
 @endsection
+@push('js')
+<script>
+    let swiper = new Swiper('.swiper', {
+        // Optional parameters
+        direction: 'horizontal',
+        loop: true,
+
+        // If we need pagination
+        pagination: {
+            el: '.swiper-pagination',
+			clickable: true,
+        },
+
+        // Navigation arrows
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+		debugging: true,
+    });
+
+	$('#owl-carousel-one').owlCarousel({
+        loop:true,
+        margin:10,
+        nav:true,
+        navText:["<div class='nav-btn prev-slide'></div>","<div class='nav-btn next-slide'></div>"],
+        responsive:{
+            0:{
+                items:1
+            },
+            600:{
+                items:3
+            },
+            1000:{
+                items:4
+            }
+        }
+    })
+
+    $('#bottom-carousel').owlCarousel({
+        loop:true,
+        margin:10,
+        responsive:{
+            0:{
+                items:1
+            },
+            600:{
+                items:3
+            },
+            1000:{
+                items:5
+            }
+        }
+    })
+</script>
+@endpush
+

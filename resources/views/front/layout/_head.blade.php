@@ -74,7 +74,7 @@
 						<button class="aside-btn"><i class="fa fa-bars"></i></button>
 						<button class="search-btn"><i class="fa fa-search"></i></button>
 						<div id="nav-search">
-							{{-- <form action="{{route('blog.cari')}}" method="get"> --}}
+							<form action="{{ route('front.search')}}" method="get">
 								<input class="input" name="cari" placeholder="Enter your search...">
 							</form>
 							<button class="nav-close search-close">
@@ -94,7 +94,7 @@
 					<ul class="nav-menu">
 						<li><a href="{{ url('') }}">Beranda</a></li>
 						<li class="has-dropdown">
-							<a href="index.html">CATEGORY</a>
+							<a href="{{ url('') }}" >CATEGORY</a>
 							<div class="dropdown">
 								<div class="dropdown-body">
 									<ul class="dropdown-list">
@@ -118,7 +118,7 @@
 			<!-- Aside Nav -->
 			<div id="nav-aside">
 				<ul class="nav-aside-menu">
-					<li><a href="index.html">Home</a></li>
+					<li><a href="{{ url('') }}">Home</a></li>
 					<li class="has-dropdown"><a>Categories</a>
 						<ul class="dropdown">
 							@foreach($category_widget as $result1)
@@ -126,8 +126,8 @@
 							@endforeach
 						</ul>
 					</li>
-					<li><a href="about.html">About Us</a></li>
-					<li><a href="contact.html">Contacts</a></li>
+					<li><a href="#">About Us</a></li>
+					<li><a href="#">Contacts</a></li>
 					<li><a href="#">Advertise</a></li>
 				</ul>
 				<button class="nav-close nav-aside-close"><span></span></button>

@@ -17,11 +17,11 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->foreignId('category_id');
-            $table->foreignId('tag_id');
+            // $table->foreignId('tag_id');
             $table->string('post_title');
-            $table->string('post_slug');
+            // $table->string('post_slug')->nullable();
             $table->longText('post_body');
-            $table->string('post_image');
+            $table->string('post_image')->nullable();
             $table->timestamps();
         });
     }
