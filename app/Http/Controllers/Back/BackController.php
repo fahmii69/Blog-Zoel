@@ -34,10 +34,20 @@ class BackController extends BaseController
                 ->addColumn('tag_id', function ($data) {
                     return $data->tags->pluck('tag_list')->toArray();
                 })
+                ->editColumn('post_image', function ($data) {
+                    if ($data->post_image) {
+                        return sprintf(
+                            // "<img class='img-responsive' src='" . $data->image . "'>",
+                            "<img class='img-responsive' src='" . ($data->imageAsset()) . "' alt='image' border='0' height='100' width='200'>",
+                        );
+                    }
+                    return '';
+                })
                 ->addColumn('action', function ($data) {
-                    $route = "/back/$data->id/edit";
+                    $route = route('post.edit', $data->id);
                     return view('components.action-button', compact('data', 'route'));
                 })
+                ->rawColumns(['post_image'])
                 ->make(true);
         }
     }

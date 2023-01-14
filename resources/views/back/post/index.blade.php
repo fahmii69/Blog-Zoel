@@ -20,7 +20,7 @@
 						<th>User</th>
 						<th>Category</th>
 						<th>Tags</th>
-						{{-- <th>Thumbnail</th> --}}
+						<th>Thumbnail</th>
 						<th>Action</th>
 					</tr>
 				</thead>
@@ -62,6 +62,10 @@
                     name: 'tag_id',
                 },
                 {
+                    data: 'post_image',
+                    name: 'post_image',
+                },
+                {
                     data: 'action',
                     name: 'action',
                     orderable: false,
@@ -78,7 +82,6 @@
                 toast: true,
                 position: 'top-end',
                 showConfirmButton: false,
-                background: 'gray',
                 timer: 5000
             });
             Swal.fire({
@@ -92,7 +95,7 @@
                 cancelButtonText: 'Cancel'
             }).then((result) => {
                 if (result.value) {
-                    let url = '{{ route('back.destroy', ':id') }}';
+                    let url = '{{ route('post.destroy', ':id') }}';
                         url = url.replace(':id', id);
 
                     $.ajax({

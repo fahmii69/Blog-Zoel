@@ -218,6 +218,17 @@ textarea.input {
   height: 90px;
 }
 
+.form-control-file{
+
+  display: block;
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 15px;
+    *height: 42px;
+    background-color: #aaaaaaa8;
+}
+
+
 /*----------------------------*\
 	button
 \*----------------------------*/
